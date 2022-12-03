@@ -2,11 +2,11 @@
 
 cd ../../project/back
 mvn clean install
-cd ../../deploy/docker
+cd ../../deploy/compose
 
 cd ../../project/web
 mvn clean install
-cd ../../deploy/docker
+cd ../../deploy/compose
 
 docker compose build
 
