@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   my-web:
-    build: ../../project/web
+    build: ${WEB_PATH_DOCKERFILE}
     networks:
       - my-net
     container_name: my-web
@@ -13,7 +13,7 @@ services:
     depends_on:
       - my-back
   my-back:
-    build: ../../project/back
+    build: ${BACK_PATH_DOCKERFILE}
     networks:
       - my-net
     container_name: my-back
@@ -33,11 +33,9 @@ services:
       POSTGRES_DB: my-db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      PGDARA: /var/lib/postgresql/data/pgdata
+      PGDARA: ${DB_PATH_POSTGRES}
     volumes:
-      - /psqldata:/var/lib/postgresql/data
-volumes:
-  psqldata: null
+      - ${DB_PATH_HOST}:${DB_PATH_POSTGRES}
 networks:
   my-net:
     driver: bridge
