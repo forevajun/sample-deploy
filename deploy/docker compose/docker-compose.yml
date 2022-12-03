@@ -1,0 +1,43 @@
+version: '3.9'
+services:
+  my-web:
+    build: ../../project/web
+    networks:
+      - my-net
+    container_name: my-web
+    restart: always
+    environment:
+      BACK_HOSTNAME: my-back
+    ports:
+      - "8080:8080"
+    depends_on:
+      - my-back
+  my-back:
+    build: ../../project/back
+    networks:
+      - my-net
+    container_name: my-back
+    restart: always
+    environment:
+      DB_HOSTNAME: my-postgres
+      DB_NAME: my-db
+    depends_on:
+      - my-postgres
+  my-postgres:
+    image: postgres:15.1-alpine
+    networks:
+      - my-net
+    container_name: my-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: my-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDARA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - /psqldata:/var/lib/postgresql/data
+volumes:
+  psqldata: null
+networks:
+  my-net:
+    driver: bridge

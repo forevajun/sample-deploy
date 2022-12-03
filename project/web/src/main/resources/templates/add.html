@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+    <form method="post" action="/person/add">
+        <label>
+            Name:
+            <input name="name" type="text" placeholder="Enter name">
+        </label>
+        <label>
+            Surname:
+            <input name="surname" type="text" placeholder="Enter surname">
+        </label>
+        <label>
+            Phone:
+            <input name="phoneNumber" type="text" placeholder="Enter phone">
+        </label>
+        <div>
+            <button type="reset">Reset</button>
+            <button type="submit">Send</button>
+        </div>
+    </form>
+    <p>Get to list <a href="/person/list">persons</a></p>
+</body>
+</html>
