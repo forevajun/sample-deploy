@@ -62,3 +62,32 @@ $ docker network rm my-net
 $ rm -rf /psqldata/
 
 ```
+
+---
+
+```bash
+# Link (deprecate)
+
+$ docker run -d \
+    --name my-postgres \
+    -e POSTGRES_DB=my-db \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    -e PGDATA=/var/lib/postgresql/data/pgdata \
+    -v /psqldata:/var/lib/postgresql/data \
+    postgres:15.1-alpine
+    
+$ docker run -it \
+    --name my-back \
+    --link my-postgres:dbUrl \
+    -e DB_HOSTNAME=my-postgres \
+    -e DB_NAME=my-db \
+    forevajun/back:v1
+    
+$ docker run -it \
+    --name my-web \
+    --link my-back:backURL \
+    -p 8080:8080 \
+    -e BACK_HOSTNAME=my-back \
+    forevajun/web:v1
+```
